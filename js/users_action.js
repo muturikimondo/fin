@@ -1,8 +1,7 @@
 $(document).ready(function () {
     // Load and render users
     function loadUsers(filters = {}) {
-        const body = $('#usersTableBody'); // Only the table body is dynamic
-        const grid = $('#usersGrid');      // Outer static card container
+        const body = $('#usersTableBody');
 
         body.html('<div class="text-center w-100"><div class="spinner-border text-primary"></div></div>');
 
@@ -18,7 +17,7 @@ $(document).ready(function () {
 
                 users.forEach(user => {
                     const row = `
-                        <div class="row align-items-center mb-2 pb-2">
+                        <div class="row align-items-center mb-2 pb-2 border-bottom">
                             <div class="col-12 col-md-2">${user.username}</div>
                             <div class="col-12 col-md-3">${user.email}</div>
                             <div class="col-12 col-md-2">${user.role}</div>
@@ -32,8 +31,8 @@ $(document).ready(function () {
                     body.append(row);
                 });
             } catch (err) {
-                body.html('<p class="text-danger">Failed to load users. Check console.</p>');
-                console.error('Failed to parse response:', response);
+                console.error('Failed to parse response:', err, response);
+                body.html('<p class="text-danger">Failed to load users. Invalid server response.</p>');
             }
         }).fail(function (xhr) {
             console.error('Error loading users:', xhr.responseText);
@@ -91,7 +90,7 @@ $(document).ready(function () {
                                 if (res.status === 'success') loadUsers();
                             });
                         } catch (e) {
-                            console.error('Delete response error:', response);
+                            console.error('Delete response error:', e, response);
                             bootbox.alert('Failed to delete user. Try again.');
                         }
                     }).fail(function (xhr) {
@@ -110,15 +109,25 @@ $(document).ready(function () {
 
         $.post('../ajax/edit_user.php', { edit_user_id: userId }, function (response) {
             try {
-                const user = JSON.parse(response);
-                $('#editUserModal #userId').val(user.id);
-                $('#editUserModal #username').val(user.username);
-                $('#editUserModal #email').val(user.email);
-                $('#editUserModal #role').val(user.role);
-                $('#editUserModal #status').val(user.status);
-                $('#editUserModal').modal('show');
+                const res = typeof response === 'string' ? JSON.parse(response) : response;
+
+                if (res.status === 'success' && res.data) {
+                    const user = res.data;
+
+                    $('#editUserModal #userId').val(user.id);
+                    $('#editUserModal #username').val(user.username);
+                    $('#editUserModal #email').val(user.email);
+                    $('#editUserModal #role').val(user.role);
+                    $('#editUserModal #status').val(user.status);
+
+                    const editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+                    editModal.show();
+                } else {
+                    console.error('Edit fetch error:', res.message || 'Unknown error');
+                    bootbox.alert('Failed to load user data for editing.');
+                }
             } catch (err) {
-                console.error('Failed to parse edit data:', response);
+                console.error('Failed to parse edit data:', err, response);
                 bootbox.alert('Failed to load user data for editing.');
             }
         }).fail(function (xhr) {
@@ -134,22 +143,33 @@ $(document).ready(function () {
         const formData = $(this).serialize();
         console.log('Submitting update:', formData);
 
-        $.post('../ajax/edit_user.php', formData, function (response) {
-            try {
-                const res = JSON.parse(response);
-                bootbox.alert(res.message, function () {
-                    if (res.status === 'success') {
-                        $('#editUserModal').modal('hide');
+        $.ajax({
+            url: '../ajax/edit_user.php',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (res) {
+                if (res.status === 'success') {
+                    bootbox.alert(res.message, function () {
+                        const editModal = bootstrap.Modal.getInstance(document.getElementById('editUserModal'));
+                        if (editModal) editModal.hide();
                         loadUsers();
-                    }
+                    });
+                } else {
+                    console.error('Server returned error:', res.message);
+                    bootbox.alert({
+                        message: `<strong>Error!</strong> ${res.message}`,
+                        className: 'bootbox-error'
+                    });
+                }
+            },
+            error: function (xhr) {
+                console.error('AJAX update failed:', xhr.responseText);
+                bootbox.alert({
+                    message: '<strong>Error!</strong> Server error while updating user.',
+                    className: 'bootbox-error'
                 });
-            } catch (err) {
-                console.error('Edit response error:', response);
-                bootbox.alert('Failed to update user. Try again.');
             }
-        }).fail(function (xhr) {
-            console.error('AJAX update failed:', xhr.responseText);
-            bootbox.alert('Server error while updating user.');
         });
     });
 });

@@ -99,4 +99,9 @@
   </div>
 </div>
 
+<!-- Dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js"></script>
+
+<!-- Your custom script -->
 <script src="../js/users_action.js"></script>

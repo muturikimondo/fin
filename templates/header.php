@@ -7,16 +7,16 @@ include_once __DIR__ . '/../includes/config.php';
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= htmlspecialchars($site_title) ?></title>
+  <title><?= isset($page_title) ? htmlspecialchars($page_title) . ' | ' : '' ?><?= htmlspecialchars($site_title) ?></title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon and Custom CSS -->
-  <link rel="icon" href="/laikipia/uploads/icons/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="/laikipia/css/custom.css">
+  <!-- Favicon and Custom Styles -->
+  <link rel="icon" href="../uploads/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/custom.css">
 
   <style>
     :root {
@@ -58,42 +58,54 @@ include_once __DIR__ . '/../includes/config.php';
       color: #dc3545;
       transform: scale(1.1);
     }
-  </style>
-</head>
-<body>
 
+    .nav-link.active {
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+  </style>
+
+  <!-- jQuery & Bootbox -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js" defer></script>
+</head>
+
+<body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" aria-label="Main navigation">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="/app/index.php">
+    <a class="navbar-brand d-flex align-items-center" href="../index.php">
       <img src="../uploads/logo/logo.png" alt="Logo" height="30" class="me-2">
       <?= htmlspecialchars($site_title) ?>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <?php foreach ($nav_items as $item): ?>
           <li class="nav-item">
-            <a class="nav-link" href="/app/<?= htmlspecialchars($item['link']) ?>">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === $item['link'] ? 'active' : '' ?>"
+               href="../<?= htmlspecialchars($item['link']) ?>">
               <?= htmlspecialchars($item['label']) ?>
             </a>
           </li>
         <?php endforeach; ?>
+
+        <!-- Mobile View Auth Links -->
         <li class="nav-item d-lg-none">
           <a href="../auth/login.php" class="nav-link text-light">Login</a>
         </li>
-        <!-- Mobile Logout with Modal -->
         <li class="nav-item d-lg-none">
           <a href="#" class="nav-link text-light" data-bs-toggle="modal" data-bs-target="#logoutModal">
             <i class="bi bi-power logout-icon"></i> Logout
           </a>
         </li>
       </ul>
-      <div class="d-none d-lg-flex ms-auto align-items-center">
-        
-        <!-- Desktop Logout Icon with Modal -->
+
+      <!-- Desktop Logout Icon -->
+      <div class="d-none d-lg-flex ms-3 align-items-center">
         <a href="#" title="Logout" class="text-white" data-bs-toggle="modal" data-bs-target="#logoutModal">
           <i class="bi bi-power logout-icon"></i>
         </a>
@@ -105,7 +117,7 @@ include_once __DIR__ . '/../includes/config.php';
 <!-- Logout Confirmation Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content shadow-sm" style="border-radius: 12px;">
+    <div class="modal-content shadow-sm rounded-3">
       <div class="modal-header bg-light">
         <h5 class="modal-title text-dark" id="logoutModalLabel">
           <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i> Confirm Logout
@@ -123,5 +135,5 @@ include_once __DIR__ . '/../includes/config.php';
   </div>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
