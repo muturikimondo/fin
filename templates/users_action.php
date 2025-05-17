@@ -50,6 +50,31 @@
         <!-- JavaScript will dynamically inject user rows here -->
       </div>
 
+      <!-- Pagination Controls -->
+<div id="paginationControls" class="d-flex justify-content-center mt-4">
+    <!-- Previous Button -->
+    <button id="previousPage" class="btn btn-outline-primary btn-sm mx-1" title="Previous">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+    
+    <!-- Page Buttons -->
+    <div id="paginationButtons" class="d-flex align-items-center mx-2">
+        <!-- Page buttons will be inserted dynamically here -->
+    </div>
+    
+    <!-- Next Button -->
+    <button id="nextPage" class="btn btn-outline-primary btn-sm mx-1" title="Next">
+        <i class="bi bi-chevron-right"></i>
+    </button>
+</div>
+
+<!-- Pagination Summary (Optional) -->
+<div id="paginationSummary" class="text-center mt-2">
+    <small class="text-muted">Page <span id="currentPageNumber">1</span> of <span id="totalPages">1</span></small>
+</div>
+
+
+
     </div>
   </div>
 </div>
@@ -90,16 +115,14 @@
             </select>
           </div>
         </div>
-       <div class="modal-footer">
-    <button type="submit" class="btn btn-outline-success btn-sm" title="Save Changes">
-        <i class="bi bi-check-circle-fill"></i> <!-- Green Tick Icon -->
-    </button>
-    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal" title="Cancel">
-        <i class="bi bi-x-circle-fill"></i> <!-- Red Cross Icon -->
-    </button>
-</div>
-
-
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-success btn-sm" title="Save Changes">
+            <i class="bi bi-check-circle-fill"></i> <!-- Green Tick Icon -->
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal" title="Cancel">
+            <i class="bi bi-x-circle-fill"></i> <!-- Red Cross Icon -->
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -111,6 +134,3 @@
 
 <!-- Your custom script -->
 <script src="../js/users_action.js"></script>
-
-
-

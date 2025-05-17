@@ -95,7 +95,7 @@ include_once __DIR__ . '/../includes/config.php';
 
         <!-- Mobile View Auth Links -->
         <li class="nav-item d-lg-none">
-          <a href="../auth/login.php" class="nav-link text-light">Login</a>
+          <a href="app/auth/login.php" class="nav-link text-light">Login</a>
         </li>
         <li class="nav-item d-lg-none">
           <a href="#" class="nav-link text-light" data-bs-toggle="modal" data-bs-target="#logoutModal">
