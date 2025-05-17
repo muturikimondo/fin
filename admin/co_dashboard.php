@@ -93,9 +93,10 @@ include '../templates/header.php';
                 <?php include '../templates/login_dashboard.php'; ?>
             </div>
             <div class="card p-2 shadow-sm rounded-4">
+                <div class="card-body p-4">
             
                 <?php include '../templates/users_action.php'; ?>
-            
+                    </div>
                     </div>
         </div>
 

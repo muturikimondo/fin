@@ -17,17 +17,25 @@ $(document).ready(function () {
 
                 users.forEach(user => {
                     const row = `
-                        <div class="row align-items-center mb-2 pb-2 border-bottom">
-                            <div class="col-12 col-md-2">${user.username}</div>
-                            <div class="col-12 col-md-3">${user.email}</div>
-                            <div class="col-12 col-md-2">${user.role}</div>
-                            <div class="col-12 col-md-2">${user.status}</div>
-                            <div class="col-12 col-md-3">
-                                <button class="btn btn-sm btn-primary edit-btn" data-id="${user.id}">Edit</button>
-                                <button class="btn btn-sm btn-danger delete-btn" data-id="${user.id}">Delete</button>
-                            </div>
-                        </div>
-                    `;
+    <div class="row align-items-center mb-2 pb-2 border-bottom">
+        <div class="col-12 col-md-2">${user.username}</div>
+        <div class="col-12 col-md-3">${user.email}</div>
+        <div class="col-12 col-md-2">${user.role}</div>
+        <div class="col-12 col-md-2">${user.status}</div>
+        <div class="col-12 col-md-3">
+            
+            
+            <!-- Added Icon Buttons for Edit and Delete -->
+            <button class="btn btn-outline-primary btn-sm edit-btn me-1" data-id="${user.id}" title="Edit">
+                <i class="bi bi-pencil"></i> <!-- Edit icon -->
+            </button>
+            <button class="btn btn-outline-danger btn-sm delete-btn" data-id="${user.id}" title="Delete">
+                <i class="bi bi-trash"></i> <!-- Trash icon -->
+            </button>
+        </div>
+    </div>
+`;
+
                     body.append(row);
                 });
             } catch (err) {

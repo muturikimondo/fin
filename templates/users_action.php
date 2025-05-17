@@ -90,10 +90,16 @@
             </select>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Save Changes</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        </div>
+       <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-success btn-sm" title="Save Changes">
+        <i class="bi bi-check-circle-fill"></i> <!-- Green Tick Icon -->
+    </button>
+    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal" title="Cancel">
+        <i class="bi bi-x-circle-fill"></i> <!-- Red Cross Icon -->
+    </button>
+</div>
+
+
       </div>
     </form>
   </div>
@@ -105,3 +111,6 @@
 
 <!-- Your custom script -->
 <script src="../js/users_action.js"></script>
+
+
+
