@@ -1,0 +1,34 @@
+/* Card hover effect */
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 99, 45, 0.2);
+    background-color: #f2e1d7;
+}
+
+/* Icon style */
+.icon-style {
+    font-size: 3.2rem;
+    color: #00632d;
+    transition: transform 0.3s ease;
+}
+
+.hover-card:hover .icon-style {
+    transform: rotate(8deg) scale(1.1);
+}
+
+/* Make entire card clickable */
+.card-link {
+    color: inherit;
+}
+.card-link:hover {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
