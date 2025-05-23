@@ -5,6 +5,11 @@ $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
 $role = $_POST['role'] ?? '';
 $status = $_POST['status'] ?? '';
+$loginCount = $_POST['login_count'] ?? '';
+$lastLoginAt = $_POST['last_login_at'] ?? '';
+$createdAt = $_POST['created_at'] ?? '';
+$photo = $_POST['photo'] ?? '';
+
 $page = max(1, (int)($_POST['page'] ?? 1));
 $pageSize = max(1, (int)($_POST['pageSize'] ?? 5));
 
@@ -48,8 +53,9 @@ $countStmt->fetch();
 $countStmt->close();
 
 // Paginated results
-$dataQuery = "SELECT id, username, email, role, status $baseQuery LIMIT ? OFFSET ?";
+$dataQuery = "SELECT id, username, email, role, status, login_count, last_login_at, created_at,photo $baseQuery LIMIT ? OFFSET ?";
 $dataStmt = $conn->prepare($dataQuery);
+
 
 // Add limit and offset to params
 $paginatedParams = $params;

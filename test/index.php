@@ -1,3 +1,10 @@
+
+
+<?php
+//include '../templates/header.php';
+
+?>
+
 <div class="container-fluid mt-4">
   <h3 class="mb-4 text-dark fw-bold">
     <i class="bi bi-people-fill me-2"></i>User Management
@@ -43,9 +50,9 @@
         <div class="col-12 col-md-1">Role</div>
         <div class="col-12 col-md-1">Status</div>
         <div class="col-12 col-md-1">Login Count</div>
-        <div class="col-12 col-md-1">Last Login</div>
+        <div class="col-12 col-md-2">Last Login</div>
         <div class="col-12 col-md-2">Created At</div>
-        <div class="col-12 col-md-2">Actions</div>
+        <div class="col-12 col-md-1">Actions</div>
       </div>
 
       <!-- Dynamic User Rows Will Be Injected Here -->
@@ -166,10 +173,14 @@
     </div>
   </div>
 </div>
+<?php
+//include '../templates/footer.php';
+?>
 
 <!-- Dependencies -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js"></script>
 
 <!-- Your custom script -->
-<script src="../js/users/index.js"></script>
+<script type="module" src="/app/js/users/index.js"></script>
+

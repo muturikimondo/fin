@@ -4,8 +4,8 @@ require_once '../includes/config.php';
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'co') {
-header('Location: ../auth/login.php');
-exit;
+    header('Location: ' . asset('auth/login.php'));
+    exit;
 }
 
 include '../templates/header.php';
@@ -21,13 +21,11 @@ include '../templates/header.php';
 <div class="container-fluid py-5">
     <!-- Page Header -->
     <div class="row mb-4">
-        <div class="col-12 text-center">
-            <!-- Optional Title and Tagline -->
-            <!--
-            <h1 class="display-5 text-<?php echo $brand_colors['accent']; ?>"><?php echo $site_title; ?> Dashboard</h1>
-            <p class="lead text-muted"><?php echo $site_tagline; ?></p>
-            -->
-        </div>
+        <!--div class="col-12 text-center">
+            <!-- Optional Title and Tagline
+            <h1 class="display-5 text-<?php //echo $brand_colors['accent']; ?>"><?php //echo $site_title; ?> Dashboard</h1>
+            <p class="lead text-muted"><?php //echo $site_tagline; ?></p>
+        </div -->
     </div>
 
     <!-- Dashboard Content -->
@@ -38,16 +36,14 @@ include '../templates/header.php';
                 <div class="card-header bg-<?php echo $brand_colors['light']; ?> text-white rounded-top-4">
                     <h5 class="fs-5 fw-semibold mb-0">
                         <h3 class="mb-4 fw-bold" style="color: #432d14;">
-  <i class="bi bi-person-check-fill me-2"></i>
-  Pending Users Actions
-</h3>
-
+                            <i class="bi bi-person-check-fill me-2"></i>
+                            Pending Users Actions
+                        </h3>
                     </h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="container-fluid">
                         <div class="row fw-bold text-white py-2 border-bottom small text-uppercase" style="background-color: #432d14;">
-
                             <div class="col-1">#</div>
                             <div class="col-3">Username</div>
                             <div class="col-3">Email</div>
@@ -92,23 +88,17 @@ include '../templates/header.php';
             <div class="mt-4">
                 <?php include '../templates/login_dashboard.php'; ?>
             </div>
-            <div class="card p-2 shadow-sm rounded-4">
-                <div class="card-body p-4">
             
-                <?php include '../templates/users_action.php'; ?>
-                    </div>
-                    </div>
         </div>
 
         <!-- Overview Section -->
         <div class="col-12 col-md-6">
             <div class="card shadow-sm rounded-4">
                 <div class="card-header text-white rounded-top-4" style="background-color: <?php echo $brand_colors['dark']; ?>;">
-
                     <h5 class="fs-5 fw-semibold mb-0">
-                         <h3 class="mb-4 text-white fw-bold"><i class="bi bi-person-plus-fill me-2"></i>
-Users Dashboard</h3>
-                        
+                        <h3 class="mb-4 text-white fw-bold"><i class="bi bi-person-plus-fill me-2"></i>
+                            Users Dashboard
+                        </h3>
                     </h5>
                 </div>
                 <div class="card-body p-4">
@@ -117,14 +107,30 @@ Users Dashboard</h3>
             </div>
         </div>
     </div>
+    <!-- Row here to show my users list -->
+     <p>
+    <div class="row">
+    <div class="col-12">
+        
+                
+                   <div class="card p-2 shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <?php include '../test/index.php'; ?>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
 
     <!-- Footer -->
-    
 </div>
 
 <?php include '../templates/footer.php'; ?>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script type="module" src="../js/admin/co_dashboard.js"></script>
-<script type="module" src="../js/analytics/dashboard.js"></script>
+<script type="module" src="<?php echo asset('js/analytics/dashboard.js'); ?>"></script>
+<script type="module" src="<?php echo asset('js/admin/co_dashboard.js'); ?>"></script>

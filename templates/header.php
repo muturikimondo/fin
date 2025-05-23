@@ -1,5 +1,4 @@
 <?php
-// templates/header.php
 include_once __DIR__ . '/../includes/config.php';
 ?>
 <!doctype html>
@@ -9,14 +8,14 @@ include_once __DIR__ . '/../includes/config.php';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= isset($page_title) ? htmlspecialchars($page_title) . ' | ' : '' ?><?= htmlspecialchars($site_title) ?></title>
 
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap & Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Favicon and Custom Styles -->
-  <link rel="icon" href="../uploads/icons/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../css/custom.css">
+  <link rel="icon" href="<?= asset('uploads/icons/favicon.ico') ?>" type="image/x-icon">
+  <link rel="stylesheet" href="<?= asset('css/custom.css') ?>">
 
   <style>
     :root {
@@ -29,7 +28,7 @@ include_once __DIR__ . '/../includes/config.php';
 
     body {
       background-color: var(--light-color);
-      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .navbar {
@@ -41,7 +40,6 @@ include_once __DIR__ . '/../includes/config.php';
     .navbar-brand {
       color: #fff;
       font-weight: 600;
-      transition: all 0.3s ease;
     }
 
     .navbar .nav-link:hover {
@@ -51,7 +49,6 @@ include_once __DIR__ . '/../includes/config.php';
     .logout-icon {
       color: #fff;
       font-size: 1.2rem;
-      transition: transform 0.2s;
     }
 
     .logout-icon:hover {
@@ -64,38 +61,29 @@ include_once __DIR__ . '/../includes/config.php';
       font-weight: 700;
     }
   </style>
-
-  <!-- jQuery & Bootbox -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js" defer></script>
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg" aria-label="Main navigation">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="../index.php">
-      <img src="../uploads/logo/logo.png" alt="Logo" height="30" class="me-2">
+    <a class="navbar-brand d-flex align-items-center" href="<?= asset('index.php') ?>">
+      <img src="<?= asset($logoPath) ?>" alt="Logo" height="30" class="me-2">
       <?= htmlspecialchars($site_title) ?>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <?php foreach ($nav_items as $item): ?>
           <li class="nav-item">
-            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === $item['link'] ? 'active' : '' ?>"
-               href="../<?= htmlspecialchars($item['link']) ?>">
+            <a class="nav-link <?= isActive($item['link']) ?>" href="<?= asset($item['link']) ?>">
               <?= htmlspecialchars($item['label']) ?>
             </a>
           </li>
         <?php endforeach; ?>
-
-        <!-- Mobile View Auth Links -->
         <li class="nav-item d-lg-none">
-          <a href="app/auth/login.php" class="nav-link text-light">Login</a>
+          <a href="<?= asset('auth/login.php') ?>" class="nav-link text-light">Login</a>
         </li>
         <li class="nav-item d-lg-none">
           <a href="#" class="nav-link text-light" data-bs-toggle="modal" data-bs-target="#logoutModal">
@@ -104,8 +92,7 @@ include_once __DIR__ . '/../includes/config.php';
         </li>
       </ul>
 
-      <!-- Desktop Logout Icon -->
-      <div class="d-none d-lg-flex ms-3 align-items-center">
+      <div class="d-none d-lg-flex ms-3">
         <a href="#" title="Logout" class="text-white" data-bs-toggle="modal" data-bs-target="#logoutModal">
           <i class="bi bi-power logout-icon"></i>
         </a>
@@ -114,26 +101,28 @@ include_once __DIR__ . '/../includes/config.php';
   </div>
 </nav>
 
-<!-- Logout Confirmation Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+<!-- Logout Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content shadow-sm rounded-3">
       <div class="modal-header bg-light">
-        <h5 class="modal-title text-dark" id="logoutModalLabel">
+        <h5 class="modal-title text-dark">
           <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i> Confirm Logout
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-muted">
-        Are you sure you want to logout? Your session will be ended.
+        Are you sure you want to logout?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <a href="../auth/logout.php" class="btn btn-danger">Logout</a>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="<?= asset('auth/logout.php') ?>" class="btn btn-danger">Logout</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Bootstrap Bundle JS -->
+<!-- JS Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js" defer></script>
