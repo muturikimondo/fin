@@ -211,10 +211,11 @@ button#registerBtn:hover {
             </div>
 
             <!-- Profile Photo -->
-            <div class="mb-3">
-              <label for="photo" class="form-label">Profile Photo</label>
-              <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
-            </div>
+             <div class="mb-3">
+    <label for="photo" class="form-label">Profile Photo</label>
+    <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+    <img id="photoPreview" src="" alt="Photo Preview" style="display: none; max-width: 200px; margin-top: 10px;">
+  </div>
 
             <!-- Submit Button -->
             <div class="d-grid mt-4">
@@ -246,4 +247,4 @@ require_once('../templates/footer.php');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js"></script>
 
-<script src="../js/auth/register.js"></script>
+<script type="module" src="../js/auth/index.js"></script>

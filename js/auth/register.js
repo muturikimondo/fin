@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitBtn = document.getElementById("registerBtn");
   const passwordField = document.getElementById("password");
   const togglePassword = document.getElementById("togglePassword");
+  const photoInput = document.getElementById("photo"); // added
 
   // Live validation on inputs
   ["input", "change"].forEach(evt => {
@@ -28,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Trigger built-in validation
     if (!form.checkValidity()) {
       e.stopPropagation();
       form.classList.add("was-validated");
@@ -40,6 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Registering...`;
 
     const formData = new FormData(form);
+
+    // ✅ Use compressed photo if available (set by imageProcessor.js)
+    if (photoInput && photoInput.compressedFile) {
+      formData.set("photo", photoInput.compressedFile);
+    }
 
     try {
       const response = await fetch("../ajax/register/register_process.php", {
@@ -53,6 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
         form.reset();
         form.classList.remove("was-validated");
         document.querySelectorAll(".is-valid").forEach(el => el.classList.remove("is-valid"));
+
+        // ✅ Reset preview and compressed file
+        document.getElementById("photoPreview")?.setAttribute("src", "");
+        if (photoInput) {
+          photoInput.value = "";
+          delete photoInput.compressedFile;
+        }
       } else {
         showToast(result.message || "Registration failed", "danger");
       }
@@ -65,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Toast handler
+// Toast handler remains unchanged
 function showToast(message, type = "info") {
   const toastEl = document.createElement("div");
   toastEl.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
