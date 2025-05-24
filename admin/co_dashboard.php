@@ -11,21 +11,14 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'co') {
 include '../templates/header.php';
 ?>
 
-<style>
-    .user-row:hover {
-        background-color: #f8f9fa;
-        cursor: pointer;
-    }
-</style>
-
 <div class="container-fluid py-5">
     <!-- Page Header -->
     <div class="row mb-4">
-        <!--div class="col-12 text-center">
-            <!-- Optional Title and Tagline
+        <!-- Optional Title and Tagline -->
+        <!-- <div class="col-12 text-center">
             <h1 class="display-5 text-<?php //echo $brand_colors['accent']; ?>"><?php //echo $site_title; ?> Dashboard</h1>
             <p class="lead text-muted"><?php //echo $site_tagline; ?></p>
-        </div -->
+        </div> -->
     </div>
 
     <!-- Dashboard Content -->
@@ -108,22 +101,16 @@ include '../templates/header.php';
         </div>
     </div>
     <!-- Row here to show my users list -->
-     <p>
+    <p>
     <div class="row">
-    <div class="col-12">
-        
-                
-                   <div class="card p-2 shadow-sm rounded-4">
+        <div class="col-12">
+            <div class="card p-2 shadow-sm rounded-4">
                 <div class="card-body p-4">
                     <?php include '../test/index.php'; ?>
                 </div>
-            
+            </div>
         </div>
     </div>
-</div>
-
-
-
 
     <!-- Footer -->
 </div>

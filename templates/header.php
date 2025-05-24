@@ -11,60 +11,28 @@ include_once __DIR__ . '/../includes/config.php';
   <!-- Bootstrap & Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon and Custom Styles -->
+  <!-- Favicon -->
   <link rel="icon" href="<?= asset('uploads/icons/favicon.ico') ?>" type="image/x-icon">
-  <link rel="stylesheet" href="<?= asset('css/custom.css') ?>">
 
+  <!-- Theme CSS Variables -->
   <style>
     :root {
-      --primary-color: <?= $brand_colors['primary'] ?>;
-      --accent-color: <?= $brand_colors['accent'] ?>;
-      --dark-color: <?= $brand_colors['dark'] ?>;
-      --beige-color: <?= $brand_colors['beige'] ?>;
-      --light-color: <?= $brand_colors['light'] ?>;
-    }
-
-    body {
-      background-color: var(--light-color);
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .navbar {
-      background-color: var(--primary-color);
-      border-bottom: 2px solid var(--accent-color);
-    }
-
-    .navbar .nav-link,
-    .navbar-brand {
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .navbar .nav-link:hover {
-      color: var(--accent-color);
-    }
-
-    .logout-icon {
-      color: #fff;
-      font-size: 1.2rem;
-    }
-
-    .logout-icon:hover {
-      color: #dc3545;
-      transform: scale(1.1);
-    }
-
-    .nav-link.active {
-      color: var(--accent-color);
-      font-weight: 700;
+        --primary-color: <?= $brand_colors['primary'] ?>;
+        --accent-color: <?= $brand_colors['accent'] ?>;
+        --dark-color: <?= $brand_colors['dark'] ?>;
+        --beige-color: <?= $brand_colors['beige'] ?>;
+        --light-color: <?= $brand_colors['light'] ?>;
     }
   </style>
-</head>
 
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="<?= asset('css/custom.css') ?>">
+</head>
 <body>
-<nav class="navbar navbar-expand-lg">
+
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="<?= asset('index.php') ?>">
       <img src="<?= asset($logoPath) ?>" alt="Logo" height="30" class="me-2">

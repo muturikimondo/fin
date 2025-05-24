@@ -1,11 +1,6 @@
-
-
-<?php
-//include '../templates/header.php';
-
-?>
-
 <div class="container-fluid mt-4">
+
+  <!-- Header -->
   <h3 class="mb-4 text-dark fw-bold">
     <i class="bi bi-people-fill me-2"></i>User Management
   </h3>
@@ -39,12 +34,13 @@
     </div>
   </div>
 
-  <!-- User Table Grid Inside a Single Card -->
-  <div class="card border" id="usersGrid">
+  <!-- User Grid -->
+  <div class="card border shadow-sm rounded-4" id="usersGrid">
     <div class="card-body">
-      <!-- Table Header (Static) -->
-      <div class="row fw-bold border-bottom pb-2 mb-3">
-        <div class="col-12 col-md-1">Photo</div>
+
+      <!-- Table Header -->
+      <div class="row fw-bold border-bottom pb-2 mb-3 text-muted small">
+         <div class="col-12 col-md-1">Photo</div>
         <div class="col-12 col-md-1">Username</div>
         <div class="col-12 col-md-2">Email</div>
         <div class="col-12 col-md-1">Role</div>
@@ -54,29 +50,22 @@
         <div class="col-12 col-md-2">Created At</div>
         <div class="col-12 col-md-1">Actions</div>
       </div>
-
-      <!-- Dynamic User Rows Will Be Injected Here -->
+      <!-- User Rows -->
       <div id="usersTableBody">
-        <!-- JavaScript will dynamically inject user rows here -->
+        <!-- JavaScript dynamically injects rows -->
       </div>
 
       <!-- Pagination Controls -->
-      <div id="paginationControls" class="d-flex justify-content-center mt-4">
+      <div id="paginationControls" class="d-flex justify-content-center align-items-center mt-4">
         <button id="previousPage" class="btn btn-outline-primary btn-sm mx-1" title="Previous">
           <i class="bi bi-chevron-left"></i>
         </button>
-
-        <!-- Page Buttons -->
-        <div id="paginationButtons" class="d-flex align-items-center mx-2">
-          <!-- Page buttons will be inserted dynamically here -->
-        </div>
-
+        <div id="paginationButtons" class="d-flex align-items-center mx-2"></div>
         <button id="nextPage" class="btn btn-outline-primary btn-sm mx-1" title="Next">
           <i class="bi bi-chevron-right"></i>
         </button>
       </div>
 
-      <!-- Pagination Summary -->
       <div id="paginationSummary" class="text-center mt-2">
         <small class="text-muted">Page <span id="currentPageNumber">1</span> of <span id="totalPages">1</span></small>
       </div>
@@ -98,7 +87,7 @@
         <div class="modal-body">
           <input type="hidden" name="userId" id="userId">
 
-          <!-- Profile photo and form fields -->
+          <!-- Photo & Info -->
           <div class="row mb-3 align-items-center">
             <div class="col-md-3 text-center">
               <img id="profilePhotoPreview" src="/app/uploads/profile/user-plus.png"
@@ -142,13 +131,13 @@
 
           <hr>
 
-          <!-- Password change toggle -->
+          <!-- Password Toggle -->
           <div class="form-check mb-2">
             <input type="checkbox" class="form-check-input" id="togglePasswordChange">
             <label class="form-check-label" for="togglePasswordChange">Change Password</label>
           </div>
 
-          <!-- Password fields -->
+          <!-- Password Fields -->
           <div id="passwordFields" class="row g-3 mb-3" style="display: none;">
             <div class="col-md-6">
               <label for="newPassword" class="form-label">New Password</label>
@@ -163,24 +152,21 @@
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">
-            <i class="bi bi-save"></i> Save Changes
+            <i class="bi bi-save me-1"></i>Save Changes
           </button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            <i class="bi bi-x-circle"></i> Cancel
+            <i class="bi bi-x-circle me-1"></i>Cancel
           </button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<?php
-//include '../templates/footer.php';
-?>
 
 <!-- Dependencies -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootbox@5.5.2/bootbox.min.js"></script>
 
-<!-- Your custom script -->
+<!-- Custom Module -->
 <script type="module" src="/app/js/users/index.js"></script>
-
